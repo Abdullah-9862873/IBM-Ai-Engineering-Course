@@ -51,7 +51,7 @@ Now that you have explored the theoretical concepts and practical applications o
 
 #### K-Nearest Neighbors (KNN)
 - Supervised ML algorithm that labels data points based on similarity to neighbors
-- Used for both classification and regression
+- Used for both classification and regression  
 
 #### Support Vector Machines (SVM)
 - Supervised learning for classification and regression
