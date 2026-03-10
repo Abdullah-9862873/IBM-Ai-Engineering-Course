@@ -58,7 +58,7 @@ Now that you have explored the theoretical concepts and practical applications o
 - Maps data instances as points in multidimensional space
 - Good for speech recognition, anomaly detection, noise filtering
 
-#### Decision Trees
+#### Decision Trees 
 - Each internal node corresponds to a test
 - Each branch corresponds to the test result
 - Each leaf node assigns data to a class
