@@ -61,7 +61,7 @@ Now that you have explored the theoretical concepts and practical applications o
 #### Decision Trees 
 - Each internal node corresponds to a test
 - Each branch corresponds to the test result
-- Each leaf node assigns data to a class
+- Each leaf node assigns data to a class 
 
 #### Regression Trees
 - Predicts continuous values rather than discrete classes
