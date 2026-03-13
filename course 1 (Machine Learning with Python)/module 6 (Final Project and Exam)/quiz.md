@@ -5,7 +5,7 @@
 ## Question 1
 **What is the True Positive rate of the RandomForestClassifier based on the confusion matrix from Exercise 13?**
 
-- The True Positive rate (TPR) for the RandomForestClassifier is approximately **50%** (or rounded to nearest whole number: **50%**)
+- The True Positive rate (TPR) for the RandomForestClassifier is approximately **50%** (or rounded to nearest whole number: **50%**) 
 
 ---
 
