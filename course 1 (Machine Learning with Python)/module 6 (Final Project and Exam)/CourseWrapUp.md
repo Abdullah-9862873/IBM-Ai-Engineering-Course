@@ -62,7 +62,7 @@ Now that you have explored the theoretical concepts and practical applications o
 - Each internal node corresponds to a test
 - Each branch corresponds to the test result
 - Each leaf node assigns data to a class 
-
+ 
 #### Regression Trees
 - Predicts continuous values rather than discrete classes
 - Built by considering features of a dataset one by one
