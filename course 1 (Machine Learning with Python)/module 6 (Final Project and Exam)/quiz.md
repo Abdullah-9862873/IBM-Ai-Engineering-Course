@@ -10,7 +10,7 @@
 ---
 
 ## Question 2
-**Identify the most important feature for predicting whether it will rain based on the feature importance bar graph.**
+**Identify the most important feature for predicting whether it will rain based on the feature importance bar graph.** 
 
 - **Humidity3pm** is the most important feature for predicting whether it will rain
 
