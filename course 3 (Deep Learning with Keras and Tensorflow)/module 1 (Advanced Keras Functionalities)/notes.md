@@ -10,7 +10,7 @@ Deep Learning is revolutionizing many fields, including:
 
 ### About Keras
 - High-level neural networks API written in Python
-- Essential part of TensorFlow
+- Essential part of TensorFlow 
 - Makes deep learning accessible and straightforward
 
 ## Course Goals
