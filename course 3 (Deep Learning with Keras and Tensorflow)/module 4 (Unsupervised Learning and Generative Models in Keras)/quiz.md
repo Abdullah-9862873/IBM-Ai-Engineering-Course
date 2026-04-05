@@ -1,72 +1,122 @@
 # Module 4: Unsupervised Learning and Generative Models in Keras - Quiz
 
 ## Question 1
-**Which of the following is a common application of unsupervised learning?**
+**What is the primary goal of an autoencoder?**
 
-- [ ] Spam email classification
-- [ ] Stock price prediction
-- [ ] Sentiment analysis
-- [x] Image segmentation
+- [ ] To classify images as either cats or dogs
+- [ ] To generate new data from random noise
+- [ ] To detect anomalies in time series data
+- [x] To compress and then reconstruct data
 
-**Answer:** Image segmentation
-
-**Explanation:** Image segmentation is an unsupervised learning task that involves grouping similar pixels or regions in an image without labeled data. Spam email classification, stock price prediction, and sentiment analysis are typically supervised learning tasks that require labeled training data.
+**Answer:** To compress and then reconstruct data
 
 ---
 
 ## Question 2
-**What is the role of the encoder in an autoencoder?**
+**In the context of diffusion models, what does the forward process involve?**
 
-- [ ] To classify input data
-- [x] To compress the input data into a lower dimensional representation
-- [ ] To reconstruct the original input
-- [ ] To generate new data samples
+- [x] Adding noise to data in multiple steps
+- [ ] Generating data from random noise
+- [ ] Clustering data into groups
+- [ ] Reducing the dimensionality of data
 
-**Answer:** To compress the input data into a lower dimensional representation
-
-**Explanation:** The encoder in an autoencoder compresses the input data into a lower-dimensional latent space representation (bottleneck). The decoder is responsible for reconstructing the original input from this compressed representation. Autoencoders are not primarily used for classification or generating new data samples (though VAEs can generate data).
+**Answer:** Adding noise to data in multiple steps
 
 ---
 
 ## Question 3
-**Which activation function is commonly used in the output layer of an autoencoder designed for image data?**
+**Which technique is commonly used for dimensionality reduction in unsupervised learning?**
 
-- [ ] Tanh
-- [ ] ReLU
-- [ ] Softmax
-- [x] Sigmoid
+- [ ] K-means clustering
+- [ ] Decision trees
+- [ ] Linear regression
+- [x] Principal Component Analysis (PCA)
 
-**Answer:** Sigmoid
-
-**Explanation:** Sigmoid activation is commonly used in the output layer of autoencoders for image data because it outputs values in the range [0, 1], which matches the normalized pixel value range of images. This ensures the reconstructed image has valid pixel values. Tanh outputs [-1, 1], ReLU outputs [0, ∞), and Softmax is used for classification tasks.
+**Answer:** Principal Component Analysis (PCA)
 
 ---
 
 ## Question 4
-**What is the main idea behind diffusion models in machine learning?**
+**What is the purpose of the bottleneck layer in an autoencoder?**
 
-- [ ] To reduce the dimensionality of the data
-- [x] To generate data by iteratively refining a noisy initial sample
-- [ ] To classify data points into different categories
-- [ ] To cluster similar data points together
+- [ ] To output the final reconstructed data
+- [ ] To generate new data samples
+- [x] To reduce the input data to a lower-dimensional representation
+- [ ] To classify data points
 
-**Answer:** To generate data by iteratively refining a noisy initial sample
-
-**Explanation:** Diffusion models are probabilistic generative models that work by starting with random noise and iteratively refining it through a reverse denoising process to produce coherent data samples. They define a forward process (adding noise) and a reverse process (denoising). Dimensionality reduction, classification, and clustering are different types of machine learning tasks.
+**Answer:** To reduce the input data to a lower-dimensional representation
 
 ---
 
 ## Question 5
-**Which loss function is commonly used when training diffusion models for image denoising?**
+**What is a common application of diffusion models?**
 
-- [ ] Sparse Categorical Crossentropy
-- [ ] Hinge Loss
-- [x] Mean Squared Error (MSE)
-- [ ] Categorical Crossentropy
+- [x] Enhancing image resolution by reducing noise
+- [ ] Translating text from one language to another
+- [ ] Predicting future stock prices
+- [ ] Segmenting customer data for marketing purposes
 
-**Answer:** Mean Squared Error (MSE)
+**Answer:** Enhancing image resolution by reducing noise
 
-**Explanation:** Mean Squared Error (MSE) is commonly used for diffusion models in image denoising tasks because it measures the pixel-wise difference between the reconstructed (denoised) image and the original clean image. This is a regression task, not classification, so crossentropy losses are not appropriate. Hinge loss is typically used for SVMs.
+---
+
+## Question 6
+**What is the primary function of the discriminator in a GAN?**
+
+- [ ] To classify images into different categories
+- [ ] To generate realistic data samples
+- [x] To distinguish between real and fake data samples
+- [ ] To reduce the dimensionality of data
+
+**Answer:** To distinguish between real and fake data samples
+
+---
+
+## Question 7
+**Which algorithm supported in TensorFlow is useful for performing clustering tasks?**
+
+- [ ] Recurrent Neural Networks (RNNs)
+- [ ] Convolutional Neural Networks (CNNs)
+- [ ] Linear regression
+- [x] K-means algorithm
+
+**Answer:** K-means algorithm
+
+---
+
+## Question 8
+**What is the typical activation function used in the output layer of a GAN's discriminator?**
+
+- [ ] Softmax
+- [x] Sigmoid
+- [ ] Tanh
+- [ ] ReLU
+
+**Answer:** Sigmoid
+
+---
+
+## Question 9
+**Why is noise added to the input of the generator in a GAN?**
+
+- [ ] To make the discriminator's task easier
+- [ ] To increase the training speed of the discriminator
+- [ ] To reduce the size of the data set
+- [x] To simulate real-world data variations
+
+**Answer:** To simulate real-world data variations
+
+---
+
+## Question 10
+**What is the main goal of training a GAN?**
+
+- [ ] To cluster similar data points together
+- [ ] To reduce the training time for neural networks
+- [x] To generate realistic synthetic data
+- [ ] To improve the accuracy of classification models
+
+**Answer:** To generate realistic synthetic data
 
 ---
 
@@ -74,13 +124,18 @@
 
 | Question | Topic | Correct Answer |
 |----------|-------|----------------|
-| 1 | Unsupervised Learning Applications | Image segmentation |
-| 2 | Autoencoder Components | Encoder compresses data |
-| 3 | Autoencoder Output Activation | Sigmoid |
-| 4 | Diffusion Models Concept | Generate data by refining noise |
-| 5 | Diffusion Model Loss Function | Mean Squared Error (MSE) |
+| 1 | Autoencoder Goal | Compress and reconstruct data |
+| 2 | Diffusion Models | Adding noise to data in multiple steps |
+| 3 | Dimensionality Reduction | PCA |
+| 4 | Autoencoder Bottleneck | Reduce input data to lower-dimensional representation |
+| 5 | Diffusion Models Application | Enhancing image resolution by reducing noise |
+| 6 | Discriminator Function | Distinguish between real and fake data samples |
+| 7 | Clustering Algorithm | K-means algorithm |
+| 8 | Discriminator Output Activation | Sigmoid |
+| 9 | Generator Noise Input | Simulate real-world data variations |
+| 10 | GAN Training Goal | Generate realistic synthetic data |
 
-**Total Points:** 5 points
+**Total Points:** 10 points
 
 ---
 
@@ -88,12 +143,15 @@
 
 | Concept | Description |
 |---------|-------------|
-| **Unsupervised Learning** | Finding patterns without labels (clustering, segmentation) |
-| **Autoencoder Encoder** | Compresses input to lower-dimensional representation |
-| **Autoencoder Decoder** | Reconstructs input from compressed representation |
-| **Output Activation** | Sigmoid for image data [0, 1] range |
-| **Diffusion Models** | Generate data by iteratively denoising random samples |
-| **Loss Functions** | MSE for regression/denoising tasks |
+| **Autoencoder** | Neural network that compresses and reconstructs data |
+| **Bottleneck Layer** | Compressed representation of input data |
+| **PCA** | Principal Component Analysis for dimensionality reduction |
+| **Diffusion Models** | Generate data by iteratively refining noisy samples |
+| **Forward Process** | Adding noise to data in multiple steps |
+| **GAN** | Generator creates data, discriminator distinguishes real from fake |
+| **Discriminator** | Classifies data as real or fake using sigmoid output |
+| **K-means** | TensorFlow-supported clustering algorithm |
+| **Noise Input** | Provides diversity and simulates real-world variations |
 
 ---
 
