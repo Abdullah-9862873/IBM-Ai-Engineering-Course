@@ -12,7 +12,7 @@
 - **Vector y**: Class labels (discrete values: 0, 1, 2, etc.)
 - Each element of y represents the class of each corresponding row in X
 
-### Two-Class Classification
+### Two-Class Classification 
 - Linear classifier equation: z = wx + b
 - For d dimensions: z = w·x + b
 
