@@ -155,3 +155,121 @@ LangChain provides diverse document loaders for various data sources:
 - **Multiple formats**: UnstructuredFileLoader
 
 Document loaders are connectors that gather data and convert it into a compatible format for downstream processing in RAG applications.
+
+---
+
+## Text Splitters in LangChain
+
+After loading documents, the next step is transforming them to suit the application better. You might need to split a document into smaller chunks that can fit into an LLM's context window.
+
+### How Text Splitters Work
+
+1. **Break into small chunks**: First, break the text into small, semantically meaningful chunks (often sentences)
+2. **Combine into larger chunks**: Combine these small chunks into larger ones aiming for a specific size
+3. **Create new chunk**: Once the size is reached, designate that chunk as separate
+4. **Overlap**: Create a new chunk with some overlap from the previous one to maintain context
+
+### Two Axes of Text Splitters
+
+1. **How text is split**: The method/strategy used to break text (characters, words, sentences, or custom tokens)
+2. **How chunk size is measured**: Criteria for when a chunk is complete (characters, words, tokens, or custom metrics)
+
+### Key Parameters
+
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| **Separator** | Character(s) used to split text (line change, paragraph, space) | By paragraphs |
+| **Chunk Size** | Maximum number of characters each chunk can contain | 1,000 |
+| **Chunk Overlap** | Number of characters that overlap between consecutive chunks | 200 |
+| **Length Function** | How the length of chunks is calculated | - |
+
+---
+
+## Commonly Used Text Splitters
+
+### 1. Character Text Splitter
+The simplest method - splits based on characters/separators:
+
+```python
+from langchain.text_splitter import CharacterTextSplitter
+
+splitter = CharacterTextSplitter(
+    separator="\n",
+    chunk_size=200,
+    chunk_overlap=20
+)
+chunks = splitter.split_text(text)
+```
+
+- Splits text by customized separator
+- Can set overlaps between chunks to ensure information isn't lost
+
+### 2. Recursive Character Text Splitter
+Uses recursion to split text - recommended for generic text:
+
+```python
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    separators=["\n\n", "\n", " ", ""],
+    chunk_size=100,
+    chunk_overlap=0
+)
+chunks = splitter.split_text(text)
+```
+
+How it works:
+- Takes large text and tries to split it up until chunks are small enough
+- Uses a set of characters: by paragraphs, sentences, words, or characters
+- Tries first separator (paragraphs), then assesses each chunk
+- If chunk exceeds size, moves to next level (sentences), and so on
+
+### 3. Code Text Splitter
+Splits code with multiple language support:
+
+```python
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter.from_language(
+    language="python",
+    chunk_size=500,
+    chunk_overlap=50
+)
+chunks = splitter.split_code(code)
+```
+
+Supported languages include: Python, JavaScript, C, C++, Go, Java, PHP, Ruby, Swift, and more.
+
+### 4. Markdown Header Text Splitter
+Splits markdown files by specified headers to honor document structure:
+
+```python
+from langchain.text_splitter import MarkdownHeaderTextSplitter
+
+headers_to_split_on = [
+    ("#", "Header 1"),
+    ("##", "Header 2"),
+    ("###", "Header 3")
+]
+
+splitter = MarkdownHeaderTextSplitter(headers_to_split_on)
+chunks = splitter.split_text(markdown_text)
+```
+
+This splits markdown content within each header group, maintaining logical structure.
+
+---
+
+## Summary
+
+LangChain text splitters allow you to:
+- Split long documents into smaller chunks that fit into LLM context windows
+- Maintain semantic meaning and context between chunks
+- Use various splitting strategies (characters, sentences, paragraphs, headers)
+- Control chunk size and overlap for optimal processing
+
+Key splitters:
+- **CharacterTextSplitter**: Simple character-based splitting
+- **RecursiveCharacterTextSplitter**: Best for generic text, uses multiple separators
+- **CodeTextSplitter**: For code with language-specific splitting
+- **MarkdownHeaderTextSplitter**: For markdown files, respects header structure
