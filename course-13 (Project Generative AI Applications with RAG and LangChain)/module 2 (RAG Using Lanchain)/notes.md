@@ -166,3 +166,146 @@ for doc in results:
 
 **Process Flow:**
 1. Load documents → 2. Split into chunks → 3. Create embeddings → 4. Store in vector database → 5. Perform similarity search to retrieve relevant content
+
+---
+
+## Advanced Retrievers in LangChain
+
+### What is a LangChain Retriever?
+
+A LangChain retriever is an interface that returns documents based on an unstructured query. It is more general than a vector store - it doesn't necessarily store documents as its purpose is to retrieve them or their chunks.
+
+**Input**: A string query
+**Output**: A list of documents or chunks
+
+---
+
+## Vector Store-Based Retriever
+
+The simplest type of retriever that retrieves documents from a vector database.
+
+**How it works:**
+1. Vector database is created by loading source documents, splitting them into chunks, and embedding them
+2. Retriever plugs into this existing vector store
+3. Accepts a query and retrieves the most similar data (chunks)
+4. Uses similarity search or Maximum Marginal Relevance (MMR)
+
+### Similarity Search
+- Retriever accepts a query and retrieves the most similar data
+- Embeds the query and compares with embedded chunks
+
+### Maximum Marginal Relevance (MMR)
+- Balances relevance and diversity of retrieved results
+- Selects documents that are both highly relevant to the query AND minimally similar to previously selected documents
+- Helps avoid redundancy and ensures comprehensive coverage of different aspects of the query
+
+**Creating a Vector Store Retriever:**
+```python
+retriever = vector_db.as_retriever()
+```
+
+---
+
+## Multi-Query Retriever
+
+Similar to vector-based retriever, except it uses an LLM to create different versions of the query, generating a richer set of retrieved documents.
+
+**Purpose:** Overcome issues from:
+- Different results due to subtle changes in query wording
+- Embeddings not capturing semantics of data well
+
+**How it works:**
+1. LLM generates alternative versions of the original query
+2. For each query version, retrieves relevant documents
+3. Takes the unique union across all queries
+4. Results in a larger set of potential relevant documents
+
+**Creating a Multi-Query Retriever:**
+```python
+from langchain.retrievers import MultiQueryRetriever
+
+retriever = MultiQueryRetriever.from_llm(
+    retriever=base_retriever,
+    llm=llm
+)
+```
+
+---
+
+## Self-Query Retriever
+
+Used when documents contain both text AND metadata. Converts the query into two components:
+1. A string to look up semantically
+2. A metadata filter to go along with it
+
+**How it works:**
+1. LLM determines which metadata filters to apply
+2. Separates semantic search from metadata filtering
+3. Can filter by year, rating, director, etc.
+
+**Example:**
+Query: "I want to watch a movie rated higher than 8.5"
+- Semantic lookup: "movie"
+- Metadata filter: year > 8.5
+
+**Creating a Self-Query Retriever:**
+```python
+from langchain.retrievers import SelfQueryRetriever
+from langchain.chains import RetrievalQA
+
+retriever = SelfQueryRetriever.from_llm(
+    llm=llm,
+    vectorstore=vector_db,
+    document_contents="Descriptions of movies",
+    metadata_field_info=[
+        {"name": "year", "description": "Year movie was released", "type": "int"},
+        {"name": "rating", "description": "IMDB rating of the movie", "type": "float"},
+    ]
+)
+```
+
+---
+
+## Parent Document Retriever
+
+Addresses conflicting requirements in document retrieval:
+- **Problem**: Need small chunks for accurate embeddings, but long enough chunks for context
+- **Solution**: Parent document retriever fetches small chunks, then returns the larger parent documents
+
+**How it works:**
+1. **Parent Splitter**: Splits text into large chunks to be retrieved
+2. **Child Splitter**: Splits documents into small chunks to generate meaningful embeddings
+3. During retrieval:
+   - First fetches the smaller chunks
+   - Looks up their parent IDs
+   - Returns the larger documents in which the small chunks live
+
+**Creating a Parent Document Retriever:**
+```python
+from langchain.retrievers import ParentDocumentRetriever
+
+parent_splitter = TextSplitter(chunk_size=2000)
+child_splitter = TextSplitter(chunk_size=400)
+
+retriever = ParentDocumentRetriever(
+    vectorstore=vector_db,
+    docstore=InMemoryStore(),
+    child_splitter=child_splitter,
+    parent_splitter=parent_splitter
+)
+
+retriever.add_documents(documents)
+```
+
+---
+
+## Summary of Retrievers
+
+| Retriever Type | Use Case | Key Feature |
+|----------------|----------|-------------|
+| **Vector Store Retriever** | Simple retrieval from vector database | Uses similarity search or MMR |
+| **Multi-Query Retriever** | Varying query formulations | Uses LLM to generate multiple query versions |
+| **Self-Query Retriever** | Documents with metadata | Separates semantic lookup from metadata filtering |
+| **Parent Document Retriever** | Need both small embeddings and full context | Returns parent documents based on child chunk matches |
+
+Each retriever addresses different retrieval challenges and can be chosen based on specific requirements of the RAG application.
