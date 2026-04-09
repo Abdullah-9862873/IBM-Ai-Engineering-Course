@@ -71,3 +71,98 @@ IBM's watsonx.ai offers powerful embedding models tailored for modern NLP applic
 
 ## Conclusion
 Embedding documents is a powerful NLP technique that enables advanced applications such as document clustering, semantic search, and text classification. By converting text into meaningful numerical representations, watsonx enables machines to better understand and process human language, driving innovation in AI-powered applications.
+
+---
+
+## Introduction to Vector Databases for Storing Embeddings
+
+After loading, splitting, and embedding data from various sources, the next crucial step is storing the embeddings. This is achieved using a vector store specifically designed to store embeddings.
+
+### What is a Vector Database?
+
+A vector database does more than just store data. It also retrieves required information based on queries using similarity search.
+
+**How it works:**
+1. The query is first converted into embeddings
+2. Input into the vector database
+3. Database performs similarity calculations to search for and retrieve the most relevant content that matches the query
+
+### Why Vector Databases?
+
+- Embeddings convert unstructured data (like text) into numerical vector formats within a high-dimensional space
+- Traditional databases (like SQL) are not optimized for storing and querying extensive vector data
+- Vector stores can index and quickly search for similar vectors using sophisticated similarity algorithms
+- This enables applications to find related vectors based on a target vector query
+
+### Supported Similarity Metrics
+- Euclidean distance
+- Cosine similarity
+- Manhattan distance
+
+---
+
+## Chroma DB - A Vector Database Supported by LangChain
+
+Chroma DB is an open-source vector store for storing and retrieving vector embeddings. Its primary use is to save embeddings and metadata for later use by large language models. It is also a powerful tool for semantic search engines over text data.
+
+### Implementing Chroma DB
+
+**Prerequisites:**
+- Load and split target data into chunks
+- Have an embedding model object ready (e.g., using watsonx)
+
+**Creating the Vector Database:**
+
+```python
+from langchain.vectorstores import Chroma
+
+# Create vector database using chunks and embedding model
+vector_db = Chroma.from_documents(
+    documents=chunks,
+    embedding=embedding_model
+)
+```
+
+Chroma DB handles the rest automatically, making the process seamless and efficient.
+
+---
+
+## Similarity Search in Vector Database
+
+### How Similarity Search Works
+
+1. **Query Input**: Start with a query (any question text you're interested in)
+2. **Embedding**: The embedding model converts the query into a numerical vector format (high-dimensional)
+3. **Comparison**: The vector database compares the query vector to all stored vectors
+4. **Retrieval**: Find the most similar vectors to the query
+
+**Performing Similarity Search:**
+
+```python
+# Perform similarity search
+query = "What is the email policy?"
+results = vector_db.similarity_search(query)
+
+# Returns top 4 most similar content by default
+for doc in results:
+    print(doc.page_content)
+```
+
+### Key Points
+- The system performs similarity calculations based on various metrics
+- Retrieves the most relevant content that matches the query
+- Enables efficient and effective information retrieval
+
+---
+
+## Summary
+
+| Concept | Description |
+|---------|-------------|
+| **Vector Store** | Database specifically designed to store and retrieve embeddings |
+| **Chroma DB** | Open-source vector store supported by LangChain for saving embeddings and metadata |
+| **Similarity Search** | Process of comparing query vector to stored vectors to find most similar matches |
+| **Similarity Metrics** | Euclidean distance, Cosine similarity, Manhattan distance |
+
+**Process Flow:**
+1. Load documents → 2. Split into chunks → 3. Create embeddings → 4. Store in vector database → 5. Perform similarity search to retrieve relevant content
