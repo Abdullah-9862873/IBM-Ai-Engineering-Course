@@ -3,7 +3,7 @@
 ## Overview
 Document embedding is the process of converting textual documents into numerical vectors. These vectors capture the semantic meaning of the documents, enabling machines to understand and process human language. Embedding models serve as the backbone for numerous NLP tasks such as text classification, sentiment analysis, and information retrieval.
 
----
+--- 
 
 ## Understanding watsonx's Embedding Model
 
