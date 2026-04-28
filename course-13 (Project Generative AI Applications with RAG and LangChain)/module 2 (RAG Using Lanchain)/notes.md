@@ -12,7 +12,7 @@ IBM's watsonx.ai offers powerful embedding models tailored for modern NLP applic
 ---
 
 ## Steps to Embed Documents Using watsonx.ai
-
+ 
 ### 1. Preparation of Data
 - Ensure documents are clean and preprocessed
 - Remove special characters, normalize text, and perform tokenization
