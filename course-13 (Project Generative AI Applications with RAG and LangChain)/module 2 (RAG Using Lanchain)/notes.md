@@ -5,7 +5,7 @@ Document embedding is the process of converting textual documents into numerical
 
 --- 
 
-## Understanding watsonx's Embedding Model
+## Understanding watsonx's Embedding Model 
 
 IBM's watsonx.ai offers powerful embedding models tailored for modern NLP applications. These models excel at creating high-quality embeddings that capture the nuances of language across various contexts.
 
